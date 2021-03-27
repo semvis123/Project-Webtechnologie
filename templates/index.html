@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Home</title>
+    <link rel="stylesheet" href="static/css/home.css">
+</head>
+<body>
+    <div class="content">
+        <div class="title">
+            <h1>Welcome back {{username}}!</h1>
+        </div>
+        <div class="button-container">
+            <a href="/posts" class="button posts">
+                <p class="label">Newest posts</p>
+                <img draggable="false" class="colors" src="static/assets/waves.png">               
+            </a>
+            <a href="/liked" class="button liked">
+                <p class="label">Liked posts</p>
+                <img draggable="false" class="colors" src="static/assets/heart.svg">
+            </a>
+            <a href="/profile" class="button profile">
+                <p class="label">Your profile</p>
+                <img draggable="false" class="colors" src="static/assets/avatar.svg">
+            </a>
+            <a href="/settings" class="button settings">
+                <p class="label">Settings</p>
+                <img draggable="false" class="colors" src="static/assets/settings.svg">
+            </a>
+        </div>
+    </div>
+    <div class="background"><img draggable="false" class="colors" src="static/assets/blob.png"></div>
+</body>
+</html>
