@@ -35,6 +35,12 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
     text-decoration: none;
+    transition: .2s all ease;
+}
+
+.sidebarbtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 7px;
 }
 
 .sidebarbtn-icon{
@@ -44,8 +50,11 @@ body {
 
 .top-buttons {
     position: relative;
+    transition: 0.2s all ease;
 }
-
+.top-buttons>*:hover {
+    filter: brightness(.8);
+}
 .logout-icon {
     margin: 10px;
     position: absolute;
@@ -57,6 +66,11 @@ body {
 
 .settings-icon-svg {
     height: 40px;
+    transition: .2s all ease;
+}
+
+.settings-icon-svg:hover {
+    transform: rotate(50deg);
 }
 
 .settings-icon {
