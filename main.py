@@ -12,12 +12,17 @@ def landing():
 @app.route('/posts')
 def posts():
     def random_iconcolor(): return "#%06x" % random.randint(0, 0xFFFFFF)
+    user = {
+        'username': 'insecureSalt',
+        'icon_color': random_iconcolor()
+    }
     posts = [
         {
             'owner': 'insecureSalt',
             'icon_color': random_iconcolor(),
             'text': 'Welcome to this fantastic post',
             'likes': 122,
+            'liked': True,
             'comments': [
                 {
                     'owner': 'shyTomatoe',
@@ -32,18 +37,22 @@ def posts():
             ]
         } for i in range(10)
     ]
-    return render_template('posts.html', posts=posts)
+    return render_template('posts.html', user=user, posts=posts)
 
 
 @app.route('/liked')
 def liked():
     def random_iconcolor(): return "#%06x" % random.randint(0, 0xFFFFFF)
+    user = {
+        'username': 'insecureSalt',
+        'icon_color': random_iconcolor()
+    }
     liked_posts = [
         {
             'owner': 'insecureSalt',
             'icon_color': random_iconcolor(),
             'text': 'Welcome to this fantastic post',
-            'likes': 122,
+            'likes': 5000,
             'comments': [
                 {
                     'owner': 'shyTomatoe',
@@ -58,7 +67,7 @@ def liked():
             ]
         } for i in range(10)
     ]
-    return render_template('posts.html', posts=liked_posts)
+    return render_template('posts.html', user=user, posts=liked_posts)
 
 
 @app.route('/settings')
