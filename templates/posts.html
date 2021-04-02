@@ -9,6 +9,14 @@
 </head>
 <body>
     <div class="sidebar">
+        <div class="top-buttons">
+            <a href="/logout" class="logout-icon">
+                <img draggable="false" class="logout-icon-svg" src="static/assets/logout_icon.svg">
+            </a>
+            <a href="/settings" class="settings-icon">
+                <img draggable="false" class="settings-icon-svg" src="static/assets/settings_icon.svg">
+            </a>
+        </div>
         <div class="icon-container">
             <div class="icon big-icon" style="background-color: {{ posts[0].icon_color }};">{{ posts[0].owner[0].upper() }}</div>
             <h3>{{ user.username }}</h3>
