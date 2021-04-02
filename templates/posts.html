@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Home</title>
+    <link rel="stylesheet" href="static/css/posts.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="icon-container">
+            <div class="icon big-icon" style="background-color: {{ posts[0].icon_color }};">{{ posts[0].owner[0].upper() }}</div>
+        </div>
+        <div class="sidebarbtn">Your posts</div>
+        <div class="sidebarbtn">Liked posts</div>
+    </div>
+    <div class="content">
+        {% for post in posts %}
+            <div class="post-container">
+                <div class="post box">
+                    <div class="icon" style="background-color: {{ post.icon_color }};">{{ post.owner[0].upper() }}</div>
+                    <div class="postcontent">
+                        <h3>{{ post.owner }}</h3>
+                        <p>{{ post.text }}</p>
+                        <!-- <p>{{post.likes}}</p> -->
+                    </div>
+                </div>
+                {% for comment in post.comments %}
+                    <div class="comment box">
+                        <div class="icon" style="background-color: {{ comment.icon_color }};">{{ comment.owner[0].upper() }}</div>
+                        <div class="postcontent">
+                            <h3>{{ comment.owner }}</h3>
+                            <p>{{ comment.text }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="background"><img draggable="false" class="colors" src="static/assets/blob.png"></div>
+</body>
+</html>
