@@ -52,12 +52,15 @@
 .big-icon {
     zoom: 3;
     color: #fff;
+    margin-bottom: 2px;
 }
 
 .icon-container {
-    margin: 30px 0;
+    margin: 40px 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
 }
 
 .post-container {
@@ -65,6 +68,7 @@
     overflow: auto;
     width: 60%;
     margin-bottom: 40px;
+    position: relative;
 }
 
 .post {
@@ -72,6 +76,23 @@
     margin: 5px;
     padding: 10px;
     display: flex;
+}
+
+.like-container {
+    position: absolute;
+    right: 0;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.like-number {
+    font-size: smaller;
+    text-align: center;
+    margin-top: px;
+}
+
+.post-like-icon {
+    height: 30px;
 }
 
 .postcontent {

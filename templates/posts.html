@@ -11,6 +11,7 @@
     <div class="sidebar">
         <div class="icon-container">
             <div class="icon big-icon" style="background-color: {{ posts[0].icon_color }};">{{ posts[0].owner[0].upper() }}</div>
+            <h3>{{ user.username }}</h3>
         </div>
         <a href="/me" class="sidebarbtn">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/posts_icon.svg">
@@ -29,7 +30,10 @@
                     <div class="postcontent">
                         <h3>{{ post.owner }}</h3>
                         <p>{{ post.text }}</p>
-                        <!-- <p>{{post.likes}}</p> -->
+                    </div>
+                    <div class="like-container">
+                        <img draggable="false" class="post-like-icon" src="static/assets/like_icon.svg">
+                        <p class="like-number">{{post.likes}}</p>
                     </div>
                 </div>
                 {% for comment in post.comments %}
