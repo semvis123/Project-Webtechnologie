@@ -12,8 +12,14 @@
         <div class="icon-container">
             <div class="icon big-icon" style="background-color: {{ posts[0].icon_color }};">{{ posts[0].owner[0].upper() }}</div>
         </div>
-        <div class="sidebarbtn">Your posts</div>
-        <div class="sidebarbtn">Liked posts</div>
+        <a href="/me" class="sidebarbtn">
+            <img draggable="false" class="sidebarbtn-icon" src="static/assets/posts_icon.svg">
+            <pre>Your posts</pre>
+        </a>
+        <a href="/liked" class="sidebarbtn">
+            <img draggable="false" class="sidebarbtn-icon" src="static/assets/like_icon.svg">
+            <pre>Liked posts</pre>
+        </a>
     </div>
     <div class="content">
         {% for post in posts %}
