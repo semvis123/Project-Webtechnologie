@@ -8,7 +8,7 @@ app = Flask(__name__)
 def landing():
     return render_template('landing.html')
 
-
+@app.route('/me')
 @app.route('/posts')
 def posts():
     def random_iconcolor(): return "#%06x" % random.randint(0, 0xFFFFFF)

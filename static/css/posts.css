@@ -24,9 +24,20 @@
 }
 
 .sidebarbtn {
-    margin-top: 1rem;
-    background: #0f0;
-    height: 2rem;
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    font-size: large;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.sidebarbtn-icon{
+    height: 80%;
+    margin: 0 5px;
 }
 
 .icon {
