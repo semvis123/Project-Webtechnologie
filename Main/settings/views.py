@@ -1,6 +1,8 @@
-from flask import Blueprint,render_template,redirect,url_for
+from flask import Blueprint, render_template, redirect, url_for
+from flask.helpers import flash
+from flask_login import current_user
 from Main import db
-# from Main.models import User
+from Main.models import User
 from Main.settings.forms import ConfigForm
 
 settings_blueprint = Blueprint('settings',
@@ -9,16 +11,20 @@ settings_blueprint = Blueprint('settings',
 
 @settings_blueprint.route('/', methods=['GET', 'POST'])
 def settings():
-
     form = ConfigForm()
     if form.validate_on_submit():
-        username = form.username.data
-        profile_color = form.profile_color.data
-        print(profile_color)
-        print(username)
-        # config = users.query.filter_by(id=session.id)
-        # db.session.add(new_user)
-        # db.session.commit()
-
+        if form.save.data:
+            username = form.username.data
+            profile_color = form.profile_color.data
+            user = User.query.filter_by(id=current_user.id).first()
+            user.username = username
+            hex_color = profile_color.hex
+            if len(hex_color) == 4:
+                user.profile_color = '#'+''.join([x + x for x in hex_color[1:]]) 
+            else:
+                user.profile_color = hex_color
+            db.session.add(user)
+            db.session.commit()
+            flash('Settings updated!')
         return redirect('/')
     return render_template('settings.html', form=form)

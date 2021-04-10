@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile configuration</title>
-    <link rel="stylesheet" href="/static/css/profile.css">
+    <link rel="stylesheet" href="/static/css/settings.css">
 </head>
 <body>
     <form class="config-container" method="POST">
@@ -13,14 +13,26 @@
         {{ form.csrf_token }}
         <div class="config-inputs">
             {{ form.username.label }}
-            {{ form.username() }}
+            {{ form.username(value=current_user.username) }}
             {{ form.profile_color.label }}
-            {{ form.profile_color() }}
+            {{ form.profile_color(value=current_user.profile_color) }}
         </div>
         <div class="config-buttons">
             {{ form.save() }}
             {{ form.cancel() }}
         </div>
     </form>
+    <div class="flash-messages">
+        {% for err in form.errors.values()  %}
+        <div class="flash-message error">
+            {{ err[0] }}
+        </div>
+        {% endfor %}
+        {% for message in get_flashed_messages()  %}
+        <div class="flash-message">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

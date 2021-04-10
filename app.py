@@ -1,5 +1,5 @@
 from Main import app
-from flask import render_template
+from flask import render_template, redirect, flash
 from flask_login import login_user, login_required, logout_user
 from Main.models import User
 from faker import Faker
@@ -14,13 +14,9 @@ def landing():
 
 @app.route('/me')
 @app.route('/posts')
+@app.route('/liked')
 @login_required
 def posts():
-
-    user = {
-        'username': 'insecureSalt',
-        'icon_color': fake.color(luminosity='dark')
-    }
     posts = [
         {
             'owner': 'insecureSalt',
@@ -42,37 +38,15 @@ def posts():
             ]
         } for i in range(10)
     ]
-    return render_template('posts.html', user=user, posts=posts)
+    return render_template('posts.html', posts=posts)
 
 
-@app.route('/liked')
+@app.route('/logout')
 @login_required
-def liked():
-    user = {
-        'username': 'insecureSalt',
-        'icon_color': fake.color(luminosity='dark')
-    }
-    liked_posts = [
-        {
-            'owner': 'insecureSalt',
-            'icon_color': fake.color(luminosity='dark'),
-            'text': 'Welcome to this fantastic post',
-            'likes': 5000,
-            'comments': [
-                {
-                    'owner': 'shyTomatoe',
-                    'icon_color': fake.color(luminosity='dark'),
-                    'text': 'Good post'
-                },
-                {
-                    'owner': 'debonairDinosaur',
-                    'icon_color': fake.color(luminosity='dark'),
-                    'text': 'Good post'
-                }
-            ]
-        } for i in range(10)
-    ]
-    return render_template('posts.html', user=user, posts=liked_posts)
+def logout():
+    logout_user()
+    flash('Log out successful!')
+    return redirect('/authenticate')
 
 
 @app.after_request

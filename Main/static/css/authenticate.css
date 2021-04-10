@@ -92,6 +92,7 @@ body {
     display: flex;
     flex-flow: column-reverse;
     pointer-events: none;
+    top: 0;
 }
 
 .flash-message {

@@ -18,8 +18,8 @@
             </a>
         </div>
         <div class="icon-container">
-            <div class="icon big-icon" style="background-color: {{ posts[0].icon_color }};">{{ posts[0].owner[0].upper() }}</div>
-            <h3>{{ user.username }}</h3>
+            <div class="icon big-icon" style="background-color: {{ current_user.profile_color }};">{{ current_user.username[0].upper() }}</div>
+            <h3>{{ current_user.username }}</h3>
         </div>
         <a href="/me" class="sidebarbtn">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/posts_icon.svg">
@@ -57,5 +57,12 @@
         {% endfor %}
     </div>
     <div class="background"><img draggable="false" class="colors" src="static/assets/blob.png"></div>
+    <div class="flash-messages">
+        {% for message in get_flashed_messages()  %}
+        <div class="flash-message">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

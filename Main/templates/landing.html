@@ -10,7 +10,7 @@
 <body>
     <div class="content">
         <div class="title">
-            <h1>Welcome back {{username}}!</h1>
+            <h1>Welcome back {{current_user.username}}!</h1>
         </div>
         <div class="button-container">
             <a href="/posts" class="button posts">
@@ -21,8 +21,8 @@
                 <p class="label">Liked posts</p>
                 <img draggable="false" class="colors" src="static/assets/heart.svg">
             </a>
-            <a href="/profile" class="button profile">
-                <p class="label">Your profile</p>
+            <a href="/me" class="button profile">
+                <p class="label">My posts</p>
                 <img draggable="false" class="colors" src="static/assets/avatar.svg">
             </a>
             <a href="/settings" class="button settings">
@@ -32,5 +32,12 @@
         </div>
     </div>
     <div class="background"><img draggable="false" class="colors" src="static/assets/blob.png"></div>
+    <div class="flash-messages">
+        {% for message in get_flashed_messages()  %}
+        <div class="flash-message">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

@@ -4,3 +4,4 @@ wtforms_components
 colour
 faker
 Flask-Login
+safe

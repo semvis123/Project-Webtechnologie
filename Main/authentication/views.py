@@ -22,18 +22,17 @@ def authenticate():
             if user:
                 # User password is already checked
                 login_user(user)
-                flash('Succesvol ingelogd.')
+                flash('Login successful.')
                 next = request.args.get('next')
                 if next == None or not next[0]=='/':
-                    next = url_for('welkom')
-                    return redirect(next)
-            raise 'unexpected error occurred'
+                    next = '/'
+                return redirect(next)
+            else:
+                raise 'unexpected error occurred'
         if register:
-            if User.query.filter_by(email=email).first():
-                raise
-
             user = User(email, password)
             db.session.add(user)
-
-        return redirect('/')
+            db.session.commit()
+            login_user(user)
+            return redirect('/settings')
     return render_template('authenticate.html', form=form)
