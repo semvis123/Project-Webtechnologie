@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    color: #fff;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(44.22deg, #002EA3 -0.94%, #00FF47 104.19%);
+    background-attachment: fixed;
+    display: grid;
+    place-items: center;
+}
+
+.config-container {
+    width: min(40vw, 40vh);
+    background: rgba(0,0,0,.5);
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 300px;
+}
+
+.config-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.config-inputs > input {
+    box-sizing: border-box;
+    border-width: 1px;
+    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    background: rgba(0,0,0,.5);
+    margin-bottom: 10px;
+    border-style: none;
+    color: #fff;
+    outline: none;
+    padding-left: 3px;
+    text-indent: 5px;
+}
+
+.config-inputs > input:focus {
+    border-style: solid;
+    border-color: rgba(255, 255, 255, .4);
+}
+
+.config-inputs > label {
+    margin-bottom: 3px;
+}
+
+.config-container > h1 {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.config-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.config-buttons > input {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    font-size: x-large;
+    background: rgba(0, 98, 188, .5);
+}
+
+.config-buttons > input:nth-child(2) {
+    background: rgba(0, 255, 25, 0.4);
+}

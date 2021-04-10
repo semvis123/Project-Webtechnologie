@@ -73,7 +73,6 @@ body {
     box-shadow: 13px 26px 45px rgba(0, 0, 0, 0.5);
     transition: .2s all ease;
     z-index: 1;
-    /* height: 100%; */
 }
 
 .posts {
@@ -83,15 +82,10 @@ body {
 }
 
 .button>* {
-    /* iOS Safari */
     -webkit-touch-callout: none;
-    /* Safari */
     -webkit-user-select: none;
-    /* Konqueror HTML */
     -khtml-user-select: none;
-    /* Old versions of Firefox */
     -moz-user-select: none;
-    /* Internet Explorer/Edge */
     -ms-user-select: none;
     user-select: none;
 }

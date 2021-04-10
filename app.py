@@ -1,8 +1,6 @@
-from flask import Flask, render_template
+from Main import app
+from flask import render_template
 import random
-
-app = Flask(__name__)
-
 
 @app.route('/')
 def landing():
@@ -70,15 +68,14 @@ def liked():
     return render_template('posts.html', user=user, posts=liked_posts)
 
 
-@app.route('/settings')
-def settings():
-    return render_template('landing.html')
-
-
 @app.route('/profile')
+@app.route('/settings')
 def profile():
-    return render_template('landing.html')
+    return render_template('profile.html')
 
+@app.route('/authenticate')
+def authenticate():
+    return render_template('authenticate.html')
 
 @app.after_request
 def add_header(r):

@@ -9,7 +9,7 @@ body {
     background-color: #131516;
 }
 .sidebar {
-    background: #333;
+    background: #2e2e2e;
     position: fixed;
     height: 100%;
     width: 15%;
@@ -111,7 +111,7 @@ body {
 }
 
 .post {
-    background: #333333;
+    background: #2e2e2e;
     margin: 5px;
     padding: 10px;
     display: flex;
