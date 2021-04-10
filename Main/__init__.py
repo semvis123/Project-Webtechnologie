@@ -2,8 +2,10 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 app = Flask(__name__)
+login_manager = LoginManager()
 
 app.config['SECRET_KEY'] = '\x8e\x82\x99o^\xfd\xf8s\xd7\xf76\xab'
 
@@ -13,3 +15,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 Migrate(app, db)
+
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+
+from Main.settings.views import settings_blueprint
+from Main.authentication.views import authentication_blueprint
+
+app.register_blueprint(settings_blueprint, url_prefix="/settings")
+app.register_blueprint(authentication_blueprint, url_prefix="/login")
+app.register_blueprint(authentication_blueprint, url_prefix="/authenticate")

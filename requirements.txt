@@ -1,1 +1,6 @@
 flask
+flask-wtf
+wtforms_components
+colour
+faker
+Flask-Login
