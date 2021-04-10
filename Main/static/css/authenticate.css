@@ -73,9 +73,37 @@ body {
     border-radius: 10px;
     border: none;
     font-size: x-large;
-    background: rgba(0, 98, 188, .5);
+    background: rgba(0, 255, 25, 0.4);
 }
 
 .login-buttons > input:nth-child(2) {
-    background: rgba(0, 255, 25, 0.4);
+    background: rgba(0, 98, 188, .5);
+}
+
+@keyframes disappear {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.flash-messages {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column-reverse;
+    pointer-events: none;
+}
+
+.flash-message {
+    background-color: #002EA3;
+    animation: disappear .3s ease 5s 1 forwards;
+    align-self: center;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.error {
+    background-color: #e00909;
+    color: #fff;
 }

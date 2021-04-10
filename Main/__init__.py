@@ -17,12 +17,11 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 login_manager.init_app(app)
-login_manager.login_view = "login"
+login_manager.login_view = "authentication.authenticate"
 
 
 from Main.settings.views import settings_blueprint
 from Main.authentication.views import authentication_blueprint
 
 app.register_blueprint(settings_blueprint, url_prefix="/settings")
-app.register_blueprint(authentication_blueprint, url_prefix="/login")
 app.register_blueprint(authentication_blueprint, url_prefix="/authenticate")

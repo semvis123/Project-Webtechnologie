@@ -9,6 +9,7 @@
 </head>
 <body>
     <form class="login-container" method="post">
+        {{ form.hidden_tag() }}
         <h1>Login / Register</h1>
         <div class="login-inputs">
             {{ form.email.label }}
@@ -21,5 +22,18 @@
             {{ form.register() }}
         </div>
     </form>
+    <div class="flash-messages">
+        {% for err in form.errors.values()  %}
+        <div class="flash-message error">
+            {{ err[0] }}
+        </div>
+        {% endfor %}
+
+        {% for message in get_flashed_messages()  %}
+        <div class="flash-message">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

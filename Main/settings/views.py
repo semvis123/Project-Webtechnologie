@@ -11,7 +11,7 @@ settings_blueprint = Blueprint('settings',
 def settings():
 
     form = ConfigForm()
-    if form.is_submitted():
+    if form.validate_on_submit():
         username = form.username.data
         profile_color = form.profile_color.data
         print(profile_color)

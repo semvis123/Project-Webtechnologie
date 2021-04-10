@@ -10,6 +10,7 @@
 <body>
     <form class="config-container" method="POST">
         <h1>Profile configuration</h1>
+        {{ form.csrf_token }}
         <div class="config-inputs">
             {{ form.username.label }}
             {{ form.username() }}
