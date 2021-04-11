@@ -50,7 +50,8 @@ def process_posts(posts):
             'owner': post.User.username,
             'owner_id': post.User.id,
             'icon_color': post.User.profile_color,
-            'text': post.Post.text,
+            # This will make sure new lines work
+            'text': post.Post.text.split('\n'),
             'likes': likes,
             'liked': is_liked,
             'comments': comments_json,
@@ -119,19 +120,19 @@ def commment(post_id):
 def like(post_id):
     try:
         if request.method == 'POST':
-                like = Like(current_user.id, post_id)
-                db.session.add(like)
-                db.session.commit()
-                flash('Saved your like!')
-                return 'Saved your like'
+            like = Like(current_user.id, post_id)
+            db.session.add(like)
+            db.session.commit()
+            flash('Saved your like!')
+            return 'Saved your like'
 
         if request.method == 'DELETE':
-                like = db.session.query(Like).filter(
-                    Like.owner_id == current_user.id).filter(Like.post_id == post_id).first()
-                db.session.delete(like)
-                db.session.commit()
-                flash('Removed your like')
-                return 'Removed your like'
+            like = db.session.query(Like).filter(
+                Like.owner_id == current_user.id).filter(Like.post_id == post_id).first()
+            db.session.delete(like)
+            db.session.commit()
+            flash('Removed your like')
+            return 'Removed your like'
     except:
         return Response(status=500)
 
