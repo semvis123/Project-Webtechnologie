@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="static/css/posts.css">
     <script src="static/js/posts.js"></script>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="top-buttons">
@@ -19,7 +21,8 @@
             </a>
         </div>
         <div class="icon-container">
-            <div class="icon big-icon" style="background-color: {{ current_user.profile_color }};">{{ current_user.username[0].upper() }}</div>
+            <div class="icon big-icon" style="background-color: {{ current_user.profile_color }};">{{
+                current_user.username[0].upper() }}</div>
             <h3>{{ current_user.username }}</h3>
         </div>
         <a href="/" class="sidebarbtn">
@@ -45,31 +48,33 @@
     </div>
     <div class="content">
         {% for post in posts %}
-            <div class="post-container">
-                <div class="post box">
-                    <div class="icon" style="background-color: {{ post.icon_color }};">{{ post.owner[0].upper() }}</div>
-                    <div class="postcontent">
-                        <h3>{{ post.owner }}</h3>
-                        <p>{{ post.text }}</p>
-                    </div>
-                    <div class="like-container">
-                        <img draggable="false" class="post-like-icon {{ ('','liked')[post.liked] }}" src="static/assets/like_icon.svg">
-                        <p class="like-number">{{post.likes}}</p>
-                    </div>
+        <div class="post-container">
+            <div class="post box">
+                <div class="icon" style="background-color: {{ post.icon_color }};">{{ post.owner[0].upper() }}</div>
+                <div class="postcontent">
+                    <h3>{{ post.owner }}</h3>
+                    <p>{{ post.text }}</p>
                 </div>
-                {% for comment in post.comments %}
-                <div class="comment box">
-                    <div class="icon" style="background-color: {{ comment.icon_color }};">{{ comment.owner[0].upper() }}</div>
-                    <div class="postcontent">
-                        <h3>{{ comment.owner }}</h3>
-                        <p>{{ comment.text }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-                <div class="comment box">
-                    <h4>Add new comment</h4>
+                <div class="like-container">
+                    <img draggable="false" class="post-like-icon {{ ('','liked')[post.liked] }}"
+                        src="static/assets/like_icon.svg">
+                    <p class="like-number">{{post.likes}}</p>
                 </div>
             </div>
+            {% for comment in post.comments %}
+            <div class="comment box">
+                <div class="icon" style="background-color: {{ comment.icon_color }};">{{ comment.owner[0].upper() }}
+                </div>
+                <div class="postcontent">
+                    <h3>{{ comment.owner }}</h3>
+                    <p>{{ comment.text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="comment box add_comment">
+                <h4>Add new comment</h4>
+            </div>
+        </div>
         {% endfor %}
     </div>
     <div id="modal-container" class="modal-background">
@@ -93,4 +98,5 @@
         {% endfor %}
     </div>
 </body>
+
 </html>
