@@ -220,6 +220,19 @@ body {
     height: 30px;
 }
 
+.post-delete-icon {
+    height: 30px;
+}
+
+.delete-container {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+    align-items: center;
+    margin-right: 10px;
+}
+
 .postcontent {
     padding: 0 10px;
     flex-grow: 1;
