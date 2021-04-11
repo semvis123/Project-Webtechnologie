@@ -39,7 +39,7 @@ def process_posts(posts):
         comments = db.session.query(Comment, User).join(
             User).filter(Comment.post_id == post.Post.id).all()
         for comment in comments:
-            comments_json.insert(0, {
+            comments_json.append({
                 'owner': comment.User.username,
                 'icon_color': comment.User.profile_color,
                 'text': comment.Comment.message
