@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request, Response
 from flask.helpers import flash
 from flask_login import current_user, login_required
 from Main import db
@@ -30,11 +30,13 @@ def process_posts(posts):
         # Get the like count
         likes = db.session.query(Like).filter(
             Like.post_id == post.Post.id).count()
+
         # Get the like status for the current user
         is_liked = db.session.query(Like).filter(Like.post_id == post.Post.id).filter(
             Like.owner_id == current_user.id).count() == 1
-        comments_json = []
+
         # Get the comments
+        comments_json = []
         comments = db.session.query(Comment, User).join(
             User).filter(Comment.post_id == post.Post.id).all()
         for comment in comments:
@@ -57,13 +59,61 @@ def process_posts(posts):
     return posts_json
 
 
-@posts_blueprint.route('/posts')
+@posts_blueprint.route('/posts', methods=['GET', 'POST'])
 @login_required
 def posts():
-    # Get all the posts
-    posts = db.session.query(Post, User).join(User).all()
+    if request.method == 'GET':
+        # Get all the posts
+        posts = db.session.query(Post, User).join(User).all()
 
-    return render_template('posts.html', posts=process_posts(posts))
+        return render_template('posts.html', posts=process_posts(posts))
+    if request.method == 'POST':
+        # Create a new posts
+        try:
+            post = Post(str(request.form['text']), current_user.id)
+            db.session.add(post)
+            db.session.commit()
+            return 'Saved your post'
+        except:
+            Response(status=500)
+            return 'Couldn\'t save your post'
+
+
+@posts_blueprint.route('/posts/<post_id>/comment', methods=['POST'])
+@login_required
+def commment(post_id):
+    try:
+        commment = Comment(current_user.id, post_id, str(request.form['text']))
+        db.session.add(commment)
+        db.session.commit()
+        return 'Saved your comment'
+    except:
+        Response(status=500)
+        return 'Couldn\'t save your comment'
+
+
+@posts_blueprint.route('/posts/<post_id>/like', methods=['POST', 'DELETE'])
+@login_required
+def like(post_id):
+    if request.method == 'POST':
+        try:
+            like = Like(current_user.id, post_id)
+            db.session.add(like)
+            db.session.commit()
+            return 'Saved your like'
+        except:
+            Response(status=500)
+            return 'Couldn\'t save your like'
+    if request.method == 'DELETE':
+        try:
+            like = db.session.query(Like).filter(
+                Like.owner_id == current_user.id).filter(Like.post_id == post_id).first()
+            db.session.delete(like)
+            db.session.commit()
+            return 'Removed your like'
+        except:
+            Response(status=500)
+            return 'Couldn\'t remove your like'
 
 
 @ posts_blueprint.route('/me')
