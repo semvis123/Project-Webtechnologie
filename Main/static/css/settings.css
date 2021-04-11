@@ -80,6 +80,11 @@ body {
     background: rgba(0, 98, 188, .5);
 }
 
+.config-buttons > input:hover {
+    filter: brightness(0.8);
+    border: 2px solid rgba(0,0,0,.5);
+}
+
 @keyframes disappear {
     from { opacity: 1; }
     to { opacity: 0; }
