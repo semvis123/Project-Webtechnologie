@@ -212,6 +212,14 @@ body {
     cursor: pointer;
 }
 
+.like-container:hover > img {
+    filter: brightness(70%);
+}
+
+.delete-container:hover > img {
+    filter: brightness(70%);
+}
+
 .like-number {
     font-size: smaller;
     text-align: center;
@@ -286,6 +294,10 @@ body {
 
 .add_comment {
     cursor: pointer;
+}
+
+.add_comment:hover {
+    filter: brightness(1.1);
 }
 
 .background>img {
