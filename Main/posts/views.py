@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request, Response
 from flask.helpers import flash
 from flask_login import current_user, login_required
 from Main import db
 from Main.models import User, Post, Like, Comment
 from Main.settings.forms import ConfigForm
+import html
 
 posts_blueprint = Blueprint('posts',
                             __name__,
@@ -30,11 +31,13 @@ def process_posts(posts):
         # Get the like count
         likes = db.session.query(Like).filter(
             Like.post_id == post.Post.id).count()
+
         # Get the like status for the current user
         is_liked = db.session.query(Like).filter(Like.post_id == post.Post.id).filter(
             Like.owner_id == current_user.id).count() == 1
-        comments_json = []
+
         # Get the comments
+        comments_json = []
         comments = db.session.query(Comment, User).join(
             User).filter(Comment.post_id == post.Post.id).all()
         for comment in comments:
@@ -57,13 +60,24 @@ def process_posts(posts):
     return posts_json
 
 
-@posts_blueprint.route('/posts')
+@posts_blueprint.route('/posts', methods=['GET', 'POST'])
 @login_required
 def posts():
-    # Get all the posts
-    posts = db.session.query(Post, User).join(User).all()
+    if request.method == 'GET':
+        # Get all the posts
+        posts = db.session.query(Post, User).join(User).all()
 
-    return render_template('posts.html', posts=process_posts(posts))
+        return render_template('posts.html', posts=process_posts(posts))
+    if request.method == 'POST':
+        # Create a new posts
+        try:
+            post = Post(str(request.form['text']), current_user.id)
+            db.session.add(post)
+            db.session.commit()
+            return 'Saved your post'
+        except:
+            Response(status=500)
+            return 'Couldn\'t save your post'
 
 
 @ posts_blueprint.route('/me')
