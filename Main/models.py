@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return f"User with username: {self.username}"
+        return "user({},{},{},{})".format(self.id, self.username, self.email, self.profile_color)
 
 
 class Comment(db.Model):
@@ -47,7 +47,7 @@ class Comment(db.Model):
         self.message = message
 
     def __repr__(self):
-        return "-=- Comment -=-\nowner_id: {}\npost_id: {}\nmessage: {}".format(self.owner_id, self.post_id, self.message)
+        return "comment({},{},{},{})".format(self.id, self.owner_id, self.post_id, self.message)
 
 
 class Like(db.Model):
@@ -62,7 +62,7 @@ class Like(db.Model):
         self.post_id = post_id
 
     def __repr__(self):
-        return "-=- Like -=-\nowner_id: {}\npost_id: {}".format(self.owner_id, self.post_id)
+        return "like({},{},{})".format(self.id, self.owner_id, self.post_id)
 
 
 class Post(db.Model):
@@ -77,7 +77,4 @@ class Post(db.Model):
         self.owner_id = owner_id
 
     def __repr__(self):
-        return f'''-=- Post -=-
-            Post with text: {self.text}
-            owner_id: {self.owner_id}
-        '''
+        return "post({}, {}, {})".format(self.id, self.owner_id, self.text)

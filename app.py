@@ -1,7 +1,7 @@
-from Main import app
+from Main import app, db
 from flask import render_template, redirect, flash
 from flask_login import login_user, login_required, logout_user
-from Main.models import User
+from Main.models import Comment, Post, User
 from faker import Faker
 fake = Faker()
 
@@ -17,28 +17,34 @@ def landing():
 @app.route('/liked')
 @login_required
 def posts():
-    posts = [
-        {
-            'owner': 'insecureSalt',
-            'icon_color': fake.color(luminosity='dark'),
-            'text': 'Welcome to this fantastic post',
-            'likes': 122,
+    posts = db.session.query(Post, User).join(User).all()
+    posts_json = []
+
+    for post in posts:
+        likes = 0
+        comments_json = []
+
+        # Get the comments
+        comments = db.session.query(Comment, User).join(User).filter(
+            Comment.post_id == post.Post.id).all()
+
+        for comment in comments:
+            comments_json.append({
+                'owner': comment.User.username,
+                'icon_color': comment.User.profile_color,
+                'text': comment.Comment.message
+            })
+
+        posts_json.append({
+            'owner': post.User.username,
+            'icon_color': post.User.profile_color,
+            'text': post.Post.text,
+            'likes': likes,
             'liked': True,
-            'comments': [
-                {
-                    'owner': 'shyTomatoe',
-                    'icon_color': fake.color(luminosity='dark'),
-                    'text': 'Good post'
-                },
-                {
-                    'owner': 'debonairDinosaur',
-                    'icon_color': fake.color(luminosity='dark'),
-                    'text': 'Good post'
-                }
-            ]
-        } for i in range(10)
-    ]
-    return render_template('posts.html', posts=posts)
+            'comments': comments_json
+        })
+
+    return render_template('posts.html', posts=posts_json)
 
 
 @app.route('/logout')
