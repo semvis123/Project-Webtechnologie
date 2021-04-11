@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 fake = Faker()
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
@@ -32,22 +33,51 @@ class User(db.Model, UserMixin):
         return f"User with username: {self.username}"
 
 
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    message = db.Column(db.String)
+
+    def __init__(self, owner_id, post_id, message):
+        self.owner_id = owner_id
+        self.post_id = post_id
+        self.message = message
+
+    def __repr__(self):
+        return "-=- Comment -=-\nowner_id: {}\npost_id: {}\nmessage: {}".format(self.owner_id, self.post_id, self.message)
+
+
+class Like(db.Model):
+    __tablename__ = 'likes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+    def __init__(self, owner_id, post_id):
+        self.owner_id = owner_id
+        self.post_id = post_id
+
+    def __repr__(self):
+        return "-=- Like -=-\nowner_id: {}\npost_id: {}".format(self.owner_id, self.post_id)
+
+
 class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True)
-    like_count = db.Column(db.Integer)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     text = db.Column(db.Text)
 
     def __init__(self, text, owner_id):
         self.text = text
         self.owner_id = owner_id
-        like_count = 0
 
     def __repr__(self):
         return f'''-=- Post -=-
             Post with text: {self.text}
             owner_id: {self.owner_id}
-            like_count: {self.like_count}
         '''
