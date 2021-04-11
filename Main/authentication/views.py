@@ -11,6 +11,8 @@ authentication_blueprint = Blueprint('authentication',
 
 @authentication_blueprint.route('/', methods=['GET', 'POST'])
 def authenticate():
+    """This function will check if the user is singed in and send them to the correct page
+    """
     form = LoginForm()
     if form.validate_on_submit():
         email = form.email.data
@@ -41,6 +43,8 @@ def authenticate():
 @authentication_blueprint.route('/logout')
 @login_required
 def logout():
+    """This function will logout the user and send them to the singin page
+    """
     logout_user()
     flash('Log out successful!')
     return redirect('/authenticate')
