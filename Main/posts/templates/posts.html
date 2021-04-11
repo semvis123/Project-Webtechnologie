@@ -55,7 +55,7 @@
                     <h3>{{ post.owner }}</h3>
                     <p>{{ post.text }}</p>
                 </div>
-                <div class="like-container">
+                <div class="like-container" data-liked="{{ post.liked }}" data-post="{{ post.id }}">
                     <img draggable="false" class="post-like-icon {{ ('','liked')[post.liked] }}"
                         src="static/assets/like_icon.svg">
                     <p class="like-number">{{post.likes}}</p>
@@ -71,8 +71,8 @@
                 </div>
             </div>
             {% endfor %}
-            <div class="comment box add_comment">
-                <h4>Add new comment</h4>
+            <div class="comment box add_comment" data-post="{{ post.id }}">
+                <h4>Add comment</h4>
             </div>
         </div>
         {% endfor %}

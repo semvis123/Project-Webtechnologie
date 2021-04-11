@@ -53,7 +53,8 @@ def process_posts(posts):
             'text': post.Post.text,
             'likes': likes,
             'liked': is_liked,
-            'comments': comments_json
+            'comments': comments_json,
+            'id': post.Post.id
         })
 
     return posts_json
@@ -87,6 +88,7 @@ def commment(post_id):
         commment = Comment(current_user.id, post_id, str(request.form['text']))
         db.session.add(commment)
         db.session.commit()
+        flash('Saved your comment')
         return 'Saved your comment'
     except:
         Response(status=500)
