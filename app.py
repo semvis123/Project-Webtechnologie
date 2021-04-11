@@ -53,14 +53,6 @@ def posts():
     return render_template('posts.html', posts=posts_json)
 
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    flash('Log out successful!')
-    return redirect('/authenticate')
-
-
 @app.after_request
 def add_header(r):
     """ Adds headers to request """

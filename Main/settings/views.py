@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask.helpers import flash
-from flask_login import current_user
+from flask_login import current_user, login_required
 from Main import db
 from Main.models import User
 from Main.settings.forms import ConfigForm
@@ -10,6 +10,7 @@ settings_blueprint = Blueprint('settings',
                              template_folder='templates/')
 
 @settings_blueprint.route('/', methods=['GET', 'POST'])
+@login_required
 def settings():
     form = ConfigForm()
     if form.validate_on_submit():

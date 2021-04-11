@@ -36,3 +36,10 @@ def authenticate():
             login_user(user)
             return redirect('/settings')
     return render_template('authenticate.html', form=form)
+
+@authentication_blueprint.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Log out successful!')
+    return redirect('/authenticate')
