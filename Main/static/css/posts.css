@@ -194,3 +194,84 @@ body {
     background-color: #e00909;
     color: #fff;
 }
+
+.modal-background {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background: #0c0c0cce;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    background: #252525;
+    height: 50%;
+    width: 50%;
+    color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.modal-title {
+    text-align: center;
+    padding: 20px;
+}
+
+.modal-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-inputs > input {
+    box-sizing: border-box;
+    border-width: 1px;
+    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    background: rgba(0,0,0,.5);
+    margin-bottom: 10px;
+    border-style: none;
+    color: #fff;
+    outline: none;
+    padding-left: 3px;
+    text-indent: 5px;
+}
+
+.modal-inputs > input:focus {
+    border-style: solid;
+    border-color: rgba(255, 255, 255, .4);
+}
+
+.modal-inputs > label {
+    margin-bottom: 3px;
+}
+
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-direction: row-reverse;
+}
+
+.modal-buttons > input {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    font-size: x-large;
+    background: rgba(0, 255, 25, 0.4); 
+    color: #fff;
+}
+
+.modal-buttons > input:nth-child(2) {
+    background: rgba(0, 98, 188, .5);
+}
+
+.modal-buttons > input:hover {
+    filter: brightness(0.8);
+    border: 2px solid rgba(0,0,0,.5);
+}
+
