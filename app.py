@@ -34,14 +34,14 @@ def posts():
             Comment.post_id == post.Post.id).all()
 
         for comment in comments:
-            comments_json.append({
+            comments_json.insert(0, {
                 'owner': comment.User.username,
                 'icon_color': comment.User.profile_color,
                 'text': comment.Comment.message
             })
 
         # Add the post
-        posts_json.append({
+        posts_json.insert(0, {
             'owner': post.User.username,
             'icon_color': post.User.profile_color,
             'text': post.Post.text,
