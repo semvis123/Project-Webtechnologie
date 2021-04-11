@@ -22,6 +22,8 @@ login_manager.login_view = "authentication.authenticate"
 
 from Main.settings.views import settings_blueprint
 from Main.authentication.views import authentication_blueprint
+from Main.posts.views import posts_blueprint
 
 app.register_blueprint(settings_blueprint, url_prefix="/settings")
 app.register_blueprint(authentication_blueprint, url_prefix="/authenticate")
+app.register_blueprint(posts_blueprint)
