@@ -4,7 +4,6 @@ from flask_login import current_user, login_required
 from Main import db
 from Main.models import User, Post, Like, Comment
 from Main.settings.forms import ConfigForm
-import html
 
 posts_blueprint = Blueprint('posts',
                             __name__,
@@ -78,6 +77,19 @@ def posts():
         except:
             Response(status=500)
             return 'Couldn\'t save your post'
+
+
+@posts_blueprint.route('/posts/<post_id>', methods=['POST'])
+@login_required
+def commment(post_id):
+    try:
+        commment = Comment(current_user.id, post_id, str(request.form['text']))
+        db.session.add(commment)
+        db.session.commit()
+        return 'Saved your comment'
+    except:
+        Response(status=500)
+        return 'Couldn\'t save your comment'
 
 
 @ posts_blueprint.route('/me')
