@@ -130,6 +130,10 @@ body {
     margin-top: px;
 }
 
+.liked{
+    filter: invert(48%) sepia(66%) saturate(7260%) hue-rotate(341deg) brightness(111%) contrast(105%);
+}
+
 .post-like-icon {
     height: 30px;
 }
