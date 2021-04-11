@@ -17,6 +17,42 @@ body {
     height: 100%;
     width: 15%;
     min-width: 250px;
+    left: 0;
+    transition: left 0.75s ease-in-out;
+    z-index: 10;
+}
+
+@media screen and (max-width: 660px) {
+    .sidebar {
+        left: -250px;
+    }
+
+    #menu-btn:checked~.sidebar {
+        left: 0 !important;
+    }
+}
+
+@media screen and (min-width: 660px) {
+    #menu-btn-label {
+        display: none !important;
+    }
+}
+
+#menu-btn {
+    display: none;
+}
+
+#menu-btn-label {
+    display: inline-block;
+    color: white;
+    background: #06864E;
+    font-style: normal;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 10px;
+    width: 46px;
+    height: 46px;
+    cursor: pointer;
 }
 
 .content {
@@ -28,6 +64,14 @@ body {
     flex-flow: wrap;
     width: 85%;
     max-width: calc(100% - 250px);
+}
+
+@media screen and (max-width: 660px) {
+    .content {
+        padding-top: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .sidebarbtn {
@@ -114,7 +158,7 @@ body {
     color: #fff;
     overflow: auto;
     width: calc(100% - 20px);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     position: relative;
 }
 
@@ -291,13 +335,13 @@ body {
     flex-direction: column;
 }
 
-.modal-inputs > input {
+.modal-inputs>input {
     box-sizing: border-box;
     border-width: 1px;
     border-radius: 10px;
     height: 40px;
     width: 100%;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     margin-bottom: 10px;
     border-style: none;
     color: #fff;
@@ -306,12 +350,12 @@ body {
     text-indent: 5px;
 }
 
-.modal-inputs > input:focus {
+.modal-inputs>input:focus {
     border-style: solid;
     border-color: rgba(255, 255, 255, .4);
 }
 
-.modal-inputs > label {
+.modal-inputs>label {
     margin-bottom: 3px;
 }
 
@@ -323,23 +367,23 @@ body {
     flex-direction: row-reverse;
 }
 
-.modal-buttons > input {
+.modal-buttons>input {
     height: 40px;
     width: 100%;
     border-radius: 10px;
     border: none;
     font-size: x-large;
-    background: rgba(0, 255, 25, 0.4); 
+    background: rgba(0, 255, 25, 0.4);
     color: #fff;
 }
 
-.modal-buttons > input:nth-child(2) {
+.modal-buttons>input:nth-child(2) {
     background: rgba(0, 98, 188, .5);
 }
 
-.modal-buttons > input:hover {
+.modal-buttons>input:hover {
     filter: brightness(0.8);
-    border: 2px solid rgba(0,0,0,.5);
+    border: 2px solid rgba(0, 0, 0, .5);
 }
 
 .modal-textarea {
