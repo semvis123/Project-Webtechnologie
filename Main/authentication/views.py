@@ -5,8 +5,8 @@ from Main import db
 from Main.authentication.forms import LoginForm
 
 authentication_blueprint = Blueprint('authentication',
-                             __name__,
-                             template_folder='templates/')
+                                     __name__,
+                                     template_folder='templates/')
 
 
 @authentication_blueprint.route('/', methods=['GET', 'POST'])
@@ -24,7 +24,7 @@ def authenticate():
                 login_user(user)
                 flash('Login successful.')
                 next = request.args.get('next')
-                if next == None or not next[0]=='/':
+                if next == None or not next[0] == '/':
                     next = '/'
                 return redirect(next)
             else:
@@ -36,6 +36,7 @@ def authenticate():
             login_user(user)
             return redirect('/settings')
     return render_template('authenticate.html', form=form)
+
 
 @authentication_blueprint.route('/logout')
 @login_required

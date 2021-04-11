@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
 }
@@ -20,7 +21,7 @@ body {
 
 .config-container {
     width: min(40vw, 40vh);
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     border-radius: 20px;
     padding: 20px;
     min-width: 300px;
@@ -31,13 +32,13 @@ body {
     flex-direction: column;
 }
 
-.config-inputs > input {
+.config-inputs>input {
     box-sizing: border-box;
     border-width: 1px;
     border-radius: 10px;
     height: 40px;
     width: 100%;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     margin-bottom: 10px;
     border-style: none;
     color: #fff;
@@ -46,16 +47,16 @@ body {
     text-indent: 5px;
 }
 
-.config-inputs > input:focus {
+.config-inputs>input:focus {
     border-style: solid;
     border-color: rgba(255, 255, 255, .4);
 }
 
-.config-inputs > label {
+.config-inputs>label {
     margin-bottom: 3px;
 }
 
-.config-container > h1 {
+.config-container>h1 {
     text-align: center;
     margin: 15px 0;
 }
@@ -67,27 +68,32 @@ body {
     flex-direction: row-reverse;
 }
 
-.config-buttons > input {
+.config-buttons>input {
     height: 40px;
     width: 100%;
     border-radius: 10px;
     border: none;
     font-size: x-large;
-    background: rgba(0, 255, 25, 0.4); 
+    background: rgba(0, 255, 25, 0.4);
 }
 
-.config-buttons > input:nth-child(2) {
+.config-buttons>input:nth-child(2) {
     background: rgba(0, 98, 188, .5);
 }
 
-.config-buttons > input:hover {
+.config-buttons>input:hover {
     filter: brightness(0.8);
-    border: 2px solid rgba(0,0,0,.5);
+    border: 2px solid rgba(0, 0, 0, .5);
 }
 
 @keyframes disappear {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
 
 .flash-messages {

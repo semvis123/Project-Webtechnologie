@@ -6,13 +6,16 @@ from wtforms.validators import DataRequired, Email, ValidationError
 from Main.models import User
 import safe
 
+
 def loginValidator(form, _element):
     if form.login.data:
         user = User.query.filter_by(email=form.email.data).first()
         if not user:
-            raise ValidationError('This combination of email and password does not exist.')
+            raise ValidationError(
+                'This combination of email and password does not exist.')
         if not check_password_hash(user.password_hash, form.password.data):
-            raise ValidationError('This combination of email and password does not exist.')
+            raise ValidationError(
+                'This combination of email and password does not exist.')
 
 
 def registerValidator(form, _element):

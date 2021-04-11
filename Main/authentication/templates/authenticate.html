@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Authenticate</title>
     <link rel="stylesheet" href="/static/css/authenticate.css">
 </head>
+
 <body>
     <form class="login-container" method="post">
         {{ form.hidden_tag() }}
@@ -23,17 +25,18 @@
         </div>
     </form>
     <div class="flash-messages">
-        {% for err in form.errors.values()  %}
+        {% for err in form.errors.values() %}
         <div class="flash-message error">
             {{ err[0] }}
         </div>
         {% endfor %}
 
-        {% for message in get_flashed_messages()  %}
+        {% for message in get_flashed_messages() %}
         <div class="flash-message">
             {{ message }}
         </div>
         {% endfor %}
     </div>
 </body>
+
 </html>

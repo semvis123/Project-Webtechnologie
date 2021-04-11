@@ -4,6 +4,7 @@ from flask_login import login_required
 from faker import Faker
 fake = Faker()
 
+
 @app.route('/')
 @login_required
 def landing():

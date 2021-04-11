@@ -4,9 +4,9 @@ window.addEventListener('load', () => {
         document.getElementById('modal-container').style.display = 'flex'
         document.querySelector('.modal-title').innerText = 'New post'
         document.getElementById('modal-submit').onclick = () => {
-            const data = new URLSearchParams();
-            const text = document.getElementById('modal-textbox').value;
-            data.append('text', text);
+            const data = new URLSearchParams()
+            const text = document.getElementById('modal-textbox').value
+            data.append('text', text)
             fetch('/posts', {
                 method: 'post',
                 body: data
@@ -27,16 +27,16 @@ window.addEventListener('load', () => {
             document.getElementById('modal-container').style.display = 'none'
         }
     })
-    
+
     Array.from(document.getElementsByClassName('add_comment')).forEach(btn => {
         btn.addEventListener('click', () => {
             document.getElementById('modal-container').style.display = 'flex'
             document.querySelector('.modal-title').innerText = 'New comment'
             document.getElementById('modal-textbox').value = ''
             document.getElementById('modal-submit').onclick = () => {
-                const data = new URLSearchParams();
-                const text = document.getElementById('modal-textbox').value;
-                data.append('text', text);
+                const data = new URLSearchParams()
+                const text = document.getElementById('modal-textbox').value
+                data.append('text', text)
                 fetch(`/posts/${btn.dataset.post}/comment`, {
                     method: 'post',
                     body: data
@@ -64,7 +64,7 @@ window.addEventListener('load', () => {
             const data = new URLSearchParams()
             const isLiked = btn.dataset.liked == 'True'
             fetch(`/posts/${btn.dataset.post}/like`, {
-                method: isLiked?'delete':'post',
+                method: isLiked ? 'delete' : 'post',
                 body: data
             }).then(res => {
                 if (res.status == 200) {

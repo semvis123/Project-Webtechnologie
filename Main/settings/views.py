@@ -6,8 +6,9 @@ from Main.models import User
 from Main.settings.forms import ConfigForm
 
 settings_blueprint = Blueprint('settings',
-                             __name__,
-                             template_folder='templates/')
+                               __name__,
+                               template_folder='templates/')
+
 
 @settings_blueprint.route('/', methods=['GET', 'POST'])
 @login_required
@@ -21,7 +22,8 @@ def settings():
             user.username = username
             hex_color = profile_color.hex
             if len(hex_color) == 4:
-                user.profile_color = '#'+''.join([x + x for x in hex_color[1:]]) 
+                user.profile_color = '#' + \
+                    ''.join([x + x for x in hex_color[1:]])
             else:
                 user.profile_color = hex_color
             db.session.add(user)

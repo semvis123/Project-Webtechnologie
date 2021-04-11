@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="static/css/landing.css">
 </head>
+
 <body>
     <div class="content">
         <div class="title">
@@ -14,8 +16,8 @@
         </div>
         <div class="button-container">
             <a href="/posts" class="button posts">
-                <p class="label">Newest posts</p>
-                <img draggable="false" class="colors" src="static/assets/waves.png">               
+                <p class="label">Recent posts</p>
+                <img draggable="false" class="colors" src="static/assets/waves.png">
             </a>
             <a href="/liked" class="button liked">
                 <p class="label">Liked posts</p>
@@ -33,11 +35,12 @@
     </div>
     <div class="background"><img draggable="false" class="colors" src="static/assets/blob.png"></div>
     <div class="flash-messages">
-        {% for message in get_flashed_messages()  %}
+        {% for message in get_flashed_messages() %}
         <div class="flash-message">
             {{ message }}
         </div>
         {% endfor %}
     </div>
 </body>
+
 </html>
