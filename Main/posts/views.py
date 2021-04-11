@@ -120,6 +120,10 @@ def commment(post_id):
 def like(post_id):
     try:
         if request.method == 'POST':
+            already_liked = db.session.query(Like).filter(
+                Like.owner_id == current_user.id).filter(Like.post_id == post_id).first()
+            if already_liked:
+                raise 'Already liked'
             like = Like(current_user.id, post_id)
             db.session.add(like)
             db.session.commit()

@@ -76,7 +76,7 @@ window.addEventListener('load', () => {
                 else {
                     message = Object.assign(document.createElement('div'), {
                         className: 'flash-message error',
-                        innerText: 'Failed to add comment'
+                        innerText: 'Failed to add/remove like'
                     })
                     document.getElementById('flash-messages').appendChild(message)
                 }
