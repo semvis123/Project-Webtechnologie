@@ -14,8 +14,10 @@ def usernameValidator(form, _element):
         form: The data from the form
     """
     username = User.query.filter_by(username=form.username.data).first()
-    username_re = re.search('^[A-Za-z0-9]$', form.username.data)
-    if (current_user.username != form.username.data and username) or not username_re:
+    username_re = bool(re.match('^[A-Za-z0-9]*$', form.username.data))
+    if not username_re:
+        raise ValidationError('Username is not valid')
+    if current_user.username != form.username.data and username:
         raise ValidationError('Username is already in use.')
 
 
