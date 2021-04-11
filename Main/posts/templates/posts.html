@@ -28,19 +28,19 @@
                 current_user.username[0].upper() }}</div>
             <h3>{{ current_user.username }}</h3>
         </div>
-        <a href="/" class="sidebarbtn">
+        <a href="/" class="sidebarbtn {{ ('', 'active')[url_for(request.endpoint) == '/'] }}">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/house.svg">
             <pre>Home</pre>
         </a>
-        <a href="/posts" class="sidebarbtn">
+        <a href="/posts" class="sidebarbtn {{ ('', 'active')[url_for(request.endpoint) == '/posts'] }}">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/newest_posts.svg">
             <pre>Recent posts</pre>
         </a>
-        <a href="/me" class="sidebarbtn">
+        <a href="/me" class="sidebarbtn {{ ('', 'active')[url_for(request.endpoint) == '/me'] }}">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/posts_icon.svg">
             <pre>My posts</pre>
         </a>
-        <a href="/liked" class="sidebarbtn">
+        <a href="/liked" class="sidebarbtn {{ ('', 'active')[url_for(request.endpoint) == '/liked'] }}">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/like_icon.svg">
             <pre>Liked posts</pre>
         </a>
@@ -53,10 +53,12 @@
         {% for post in posts %}
         <div class="post-container">
             <div class="post box">
-                <div class="delete-container" data-post="{{ post.id }}">
-                    <img draggable="false" class="post-delete-icon"
-                        src="static/assets/trash.svg">
-                </div>
+                {% if current_user.id==post.owner_id %}
+                    <div class="delete-container" data-post="{{ post.id }}">
+                        <img draggable="false" class="post-delete-icon"
+                            src="static/assets/trash.svg">
+                    </div>    
+                {% endif %}
                 <div class="icon" style="background-color: {{ post.icon_color }};">{{ post.owner[0].upper() }}</div>
                 <div class="postcontent">
                     <h3>{{ post.owner }}</h3>

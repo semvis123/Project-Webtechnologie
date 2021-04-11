@@ -48,6 +48,7 @@ def process_posts(posts):
         # Add the post
         posts_json.insert(0, {
             'owner': post.User.username,
+            'owner_id': post.User.id,
             'icon_color': post.User.profile_color,
             'text': post.Post.text,
             'likes': likes,
@@ -76,8 +77,28 @@ def posts():
             flash('Created post successfully!')
             return 'Saved your post'
         except:
-            Response(status=500)
-            return 'Couldn\'t save your post'
+            return Response(status=500)
+
+
+@posts_blueprint.route('/posts/<post_id>', methods=['DELETE'])
+@login_required
+def delete(post_id):
+    try:
+        post = db.session.query(Post).filter(
+            Post.owner_id == current_user.id).filter(Post.id == post_id).first()
+        if post:
+            delete_comments = Comment.__table__.delete().where(Comment.post_id == post_id)
+            delete_likes = Like.__table__.delete().where(Like.post_id == post_id)
+            db.session.delete(post)
+            db.session.execute(delete_comments)
+            db.session.execute(delete_likes)
+            db.session.commit()
+            flash('Removed post')
+            return 'Removed post'
+        else:
+            raise 'post couldn\'t be  found'
+    except:
+        return Response(status=500)
 
 
 @posts_blueprint.route('/posts/<post_id>/comment', methods=['POST'])
@@ -90,36 +111,31 @@ def commment(post_id):
         flash('Saved your comment')
         return 'Saved your comment'
     except:
-        Response(status=500)
-        return 'Couldn\'t save your comment'
+        return Response(status=500)
 
 
 @posts_blueprint.route('/posts/<post_id>/like', methods=['POST', 'DELETE'])
 @login_required
 def like(post_id):
-    if request.method == 'POST':
-        try:
-            like = Like(current_user.id, post_id)
-            db.session.add(like)
-            db.session.commit()
-            return 'Saved your like'
-        except:
-            Response(status=500)
-            return 'Couldn\'t save your like'
-    if request.method == 'DELETE':
-        try:
-            like = db.session.query(Like).filter(
-                Like.owner_id == current_user.id).filter(Like.post_id == post_id).first()
-            db.session.delete(like)
-            db.session.commit()
-            return 'Removed your like'
-        except:
-            Response(status=500)
-            return 'Couldn\'t remove your like'
+    try:
+        if request.method == 'POST':
+                like = Like(current_user.id, post_id)
+                db.session.add(like)
+                db.session.commit()
+                return 'Saved your like'
+
+        if request.method == 'DELETE':
+                like = db.session.query(Like).filter(
+                    Like.owner_id == current_user.id).filter(Like.post_id == post_id).first()
+                db.session.delete(like)
+                db.session.commit()
+                return 'Removed your like'
+    except:
+        return Response(status=500)
 
 
-@ posts_blueprint.route('/me')
-@ login_required
+@posts_blueprint.route('/me')
+@login_required
 def me():
     # Get all post created by the current user
     posts = db.session.query(Post, User).join(User).filter(
@@ -129,7 +145,7 @@ def me():
 
 
 @posts_blueprint.route('/liked')
-@ login_required
+@login_required
 def liked():
     # Get all post liked by the current user
     posts = db.session.query(Like, Post, User).join(Post, Like.post_id == Post.id).join(User, Post.owner_id == User.id).filter(
