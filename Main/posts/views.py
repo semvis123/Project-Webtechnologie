@@ -79,7 +79,7 @@ def posts():
             return 'Couldn\'t save your post'
 
 
-@posts_blueprint.route('/posts/<post_id>', methods=['POST'])
+@posts_blueprint.route('/posts/<post_id>/comment', methods=['POST'])
 @login_required
 def commment(post_id):
     try:
@@ -90,6 +90,30 @@ def commment(post_id):
     except:
         Response(status=500)
         return 'Couldn\'t save your comment'
+
+
+@posts_blueprint.route('/posts/<post_id>/like', methods=['POST', 'DELETE'])
+@login_required
+def like(post_id):
+    if request.method == 'POST':
+        try:
+            like = Like(current_user.id, post_id)
+            db.session.add(like)
+            db.session.commit()
+            return 'Saved your like'
+        except:
+            Response(status=500)
+            return 'Couldn\'t save your like'
+    if request.method == 'DELETE':
+        try:
+            like = db.session.query(Like).filter(
+                Like.owner_id == current_user.id).filter(Like.post_id == post_id).first()
+            db.session.delete(like)
+            db.session.commit()
+            return 'Removed your like'
+        except:
+            Response(status=500)
+            return 'Couldn\'t remove your like'
 
 
 @ posts_blueprint.route('/me')
