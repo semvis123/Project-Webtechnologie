@@ -62,7 +62,9 @@
                 <div class="icon" style="background-color: {{ post.icon_color }};">{{ post.owner[0].upper() }}</div>
                 <div class="postcontent">
                     <h3>{{ post.owner }}</h3>
-                    <p>{{ post.text }}</p>
+                    {% for para in post.text %}
+                        <p>{{para}}</p>
+                    {% endfor %}
                 </div>
                 <div class="like-container" data-liked="{{ post.liked }}" data-post="{{ post.id }}">
                     <img draggable="false" class="post-like-icon {{ ('','liked')[post.liked] }}"
