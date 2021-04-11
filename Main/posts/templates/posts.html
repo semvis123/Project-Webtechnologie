@@ -53,6 +53,10 @@
         {% for post in posts %}
         <div class="post-container">
             <div class="post box">
+                <div class="delete-container" data-post="{{ post.id }}">
+                    <img draggable="false" class="post-delete-icon"
+                        src="static/assets/trash.svg">
+                </div>
                 <div class="icon" style="background-color: {{ post.icon_color }};">{{ post.owner[0].upper() }}</div>
                 <div class="postcontent">
                     <h3>{{ post.owner }}</h3>

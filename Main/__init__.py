@@ -1,6 +1,3 @@
-from Main.posts.views import posts_blueprint
-from Main.authentication.views import authentication_blueprint
-from Main.settings.views import settings_blueprint
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -23,6 +20,9 @@ Migrate(app, db)
 login_manager.init_app(app)
 login_manager.login_view = "authentication.authenticate"
 
+from Main.posts.views import posts_blueprint
+from Main.authentication.views import authentication_blueprint
+from Main.settings.views import settings_blueprint
 
 app.register_blueprint(settings_blueprint, url_prefix="/settings")
 app.register_blueprint(authentication_blueprint, url_prefix="/authenticate")
