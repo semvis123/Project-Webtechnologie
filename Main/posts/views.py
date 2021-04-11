@@ -6,15 +6,24 @@ from Main.models import User, Post, Like, Comment
 from Main.settings.forms import ConfigForm
 
 posts_blueprint = Blueprint('posts',
-                             __name__,
-                             template_folder='templates/')
+                            __name__,
+                            template_folder='templates/')
 
-@posts_blueprint.route('/me')
-@posts_blueprint.route('/posts')
-@posts_blueprint.route('/liked')
-@login_required
-def posts():
+
+def process_posts(posts):
+    """This function will make the posts into a usable format for the html template
+
+    example usage:
+
     posts = db.session.query(Post, User).join(User).all()
+    return render_template('posts.html', posts=process_posts(posts))
+
+    Args:
+        posts: The data from the database
+
+    Returns:
+        Any: The data for the template
+    """
     posts_json = []
 
     for post in posts:
@@ -22,14 +31,12 @@ def posts():
         likes = db.session.query(Like).filter(
             Like.post_id == post.Post.id).count()
         # Get the like status for the current user
-        is_liked = db.session.query(Like).filter(
-            Like.post_id == post.Post.id).filter(Like.owner_id == current_user.id).count() == 1
+        is_liked = db.session.query(Like).filter(Like.post_id == post.Post.id).filter(
+            Like.owner_id == current_user.id).count() == 1
         comments_json = []
-
         # Get the comments
-        comments = db.session.query(Comment, User).join(User).filter(
-            Comment.post_id == post.Post.id).all()
-
+        comments = db.session.query(Comment, User).join(
+            User).filter(Comment.post_id == post.Post.id).all()
         for comment in comments:
             comments_json.insert(0, {
                 'owner': comment.User.username,
@@ -47,4 +54,33 @@ def posts():
             'comments': comments_json
         })
 
-    return render_template('posts.html', posts=posts_json)
+    return posts_json
+
+
+@posts_blueprint.route('/posts')
+@login_required
+def posts():
+    # Get all the posts
+    posts = db.session.query(Post, User).join(User).all()
+
+    return render_template('posts.html', posts=process_posts(posts))
+
+
+@ posts_blueprint.route('/me')
+@ login_required
+def me():
+    # Get all post created by the current user
+    posts = db.session.query(Post, User).join(User).filter(
+        Post.owner_id == current_user.id).all()
+
+    return render_template('posts.html', posts=process_posts(posts))
+
+
+@posts_blueprint.route('/liked')
+@ login_required
+def liked():
+    # Get all post liked by the current user
+    posts = db.session.query(Like, Post, User).join(Post, Like.post_id == Post.id).join(User, Post.owner_id == User.id).filter(
+        Like.owner_id == current_user.id).all()
+
+    return render_template('posts.html', posts=process_posts(posts))
