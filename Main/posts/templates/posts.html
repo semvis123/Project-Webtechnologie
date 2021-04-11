@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Home</title>
     <link rel="stylesheet" href="static/css/posts.css">
+    <script src="static/js/posts.js"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -27,17 +28,17 @@
         </a>
         <a href="/posts" class="sidebarbtn">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/newest_posts.svg">
-            <pre>My posts</pre>
+            <pre>Recent posts</pre>
         </a>
         <a href="/me" class="sidebarbtn">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/posts_icon.svg">
-            <pre>Your posts</pre>
+            <pre>My posts</pre>
         </a>
         <a href="/liked" class="sidebarbtn">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/like_icon.svg">
             <pre>Liked posts</pre>
         </a>
-        <a href="/posts/new/" class="sidebarbtn">
+        <a href="#" id="newpost-btn" class="sidebarbtn">
             <img draggable="false" class="sidebarbtn-icon" src="static/assets/new_post.svg">
             <pre>New post</pre>
         </a>
@@ -71,17 +72,20 @@
             </div>
         {% endfor %}
     </div>
-    <div class="modal-background">
-        <div class="modal">
-            <h2 class="modal-title">Create new post</h2>
+    <div id="modal-container" class="modal-background">
+        <div id="modal" class="modal">
+            <h2 class="modal-title"></h2>
+            <div class="modal-text-container">
+                <textarea name="text" id="modal-textbox" class="modal-textarea"></textarea>
+            </div>
             <div class="modal-buttons">
-                <input type="submit" value="submit">
-                <input type="submit" value="cancel">
+                <input id="modal-submit" type="submit" value="submit">
+                <input id="modal-cancel" type="submit" value="cancel">
             </div>
         </div>
     </div>
     <div class="background"><img draggable="false" class="colors" src="static/assets/blob.png"></div>
-    <div class="flash-messages">
+    <div id="flash-messages" class="flash-messages">
         {% for message in get_flashed_messages()  %}
         <div class="flash-message">
             {{ message }}

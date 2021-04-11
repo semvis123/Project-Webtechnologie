@@ -188,6 +188,7 @@ body {
     margin: 10px;
     border-radius: 10px;
     padding: 10px;
+    color: #fff;
 }
 
 .error {
@@ -203,6 +204,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
 }
 
 .modal {
@@ -212,11 +214,13 @@ body {
     color: #fff;
     border-radius: 20px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-title {
     text-align: center;
-    padding: 20px;
+    padding-bottom: 20px;
 }
 
 .modal-inputs {
@@ -275,3 +279,14 @@ body {
     border: 2px solid rgba(0,0,0,.5);
 }
 
+.modal-textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: large;
+    text-indent: 2px;
+}
+
+.modal-text-container {
+    flex: 1;
+}

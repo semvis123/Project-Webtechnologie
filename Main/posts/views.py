@@ -73,6 +73,7 @@ def posts():
             post = Post(str(request.form['text']), current_user.id)
             db.session.add(post)
             db.session.commit()
+            flash('Created post successfully!')
             return 'Saved your post'
         except:
             Response(status=500)
