@@ -108,7 +108,7 @@ def commment(post_id):
         commment = Comment(current_user.id, post_id, str(request.form['text']))
         db.session.add(commment)
         db.session.commit()
-        flash('Saved your comment')
+        flash('Saved your comment!')
         return 'Saved your comment'
     except:
         return Response(status=500)
@@ -122,6 +122,7 @@ def like(post_id):
                 like = Like(current_user.id, post_id)
                 db.session.add(like)
                 db.session.commit()
+                flash('Saved your like!')
                 return 'Saved your like'
 
         if request.method == 'DELETE':
@@ -129,6 +130,7 @@ def like(post_id):
                     Like.owner_id == current_user.id).filter(Like.post_id == post_id).first()
                 db.session.delete(like)
                 db.session.commit()
+                flash('Removed your like')
                 return 'Removed your like'
     except:
         return Response(status=500)
