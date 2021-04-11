@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, request, Response
+from flask import Blueprint, render_template, request, Response
 from flask.helpers import flash
 from flask_login import current_user, login_required
 from Main import db
 from Main.models import User, Post, Like, Comment
-from Main.settings.forms import ConfigForm
 
 posts_blueprint = Blueprint('posts',
                             __name__,

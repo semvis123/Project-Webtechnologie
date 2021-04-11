@@ -1,10 +1,8 @@
-from Main import app, db
-from flask import render_template, redirect, flash
-from flask_login import login_user, login_required, logout_user, current_user
-from Main.models import Comment, Post, User, Like
+from Main import app
+from flask import render_template
+from flask_login import login_required
 from faker import Faker
 fake = Faker()
-
 
 @app.route('/')
 @login_required

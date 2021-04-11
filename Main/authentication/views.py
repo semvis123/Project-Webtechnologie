@@ -1,5 +1,5 @@
 from Main.models import User
-from flask import Blueprint, render_template, redirect, flash, request, url_for
+from flask import Blueprint, render_template, redirect, flash, request
 from flask_login import login_user, login_required, logout_user
 from Main import db
 from Main.authentication.forms import LoginForm
