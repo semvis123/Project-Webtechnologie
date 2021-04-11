@@ -1,7 +1,7 @@
 from Main import app, db
 from flask import render_template, redirect, flash
-from flask_login import login_user, login_required, logout_user
-from Main.models import Comment, Post, User
+from flask_login import login_user, login_required, logout_user, current_user
+from Main.models import Comment, Post, User, Like
 from faker import Faker
 fake = Faker()
 
@@ -21,7 +21,12 @@ def posts():
     posts_json = []
 
     for post in posts:
-        likes = 0
+        # Get the like count
+        likes = db.session.query(Like).filter(
+            Like.post_id == post.Post.id).count()
+        # Get the like status for the current user
+        is_liked = db.session.query(Like).filter(
+            Like.post_id == post.Post.id).filter(Like.owner_id == current_user.id).count() == 1
         comments_json = []
 
         # Get the comments
@@ -35,12 +40,13 @@ def posts():
                 'text': comment.Comment.message
             })
 
+        # Add the post
         posts_json.append({
             'owner': post.User.username,
             'icon_color': post.User.profile_color,
             'text': post.Post.text,
             'likes': likes,
-            'liked': True,
+            'liked': is_liked,
             'comments': comments_json
         })
 
