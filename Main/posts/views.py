@@ -3,6 +3,7 @@ from flask.helpers import flash
 from flask_login import current_user, login_required
 from Main import db
 from Main.models import User, Post, Like, Comment
+import re
 
 posts_blueprint = Blueprint('posts',
                             __name__,
@@ -70,6 +71,11 @@ def posts():
 
         return render_template('posts.html', posts=process_posts(posts))
     if request.method == 'POST':
+        # Test the data
+        # Empty data is not valid
+        if len(str(request.form['text']).strip()) == 0:
+            return Response(status=500)
+
         # Create a new posts
         try:
             post = Post(str(request.form['text']), current_user.id)
