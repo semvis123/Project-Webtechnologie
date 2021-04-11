@@ -242,8 +242,8 @@ body {
     flex-grow: 0;
     flex-shrink: 0;
     cursor: pointer;
-    align-items: center;
     margin-right: 10px;
+    margin-top: 3px;
 }
 
 .postcontent {
