@@ -3,7 +3,6 @@ from flask.helpers import flash
 from flask_login import current_user, login_required
 from Main import db
 from Main.models import User, Post, Like, Comment
-import re
 
 posts_blueprint = Blueprint('posts',
                             __name__,
