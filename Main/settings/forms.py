@@ -26,4 +26,3 @@ class ConfigForm(FlaskForm):
                            DataRequired(), usernameValidator])
     profile_color = ColorField('Profile color')
     save = SubmitField('Save')
-    cancel = SubmitField('Cancel', render_kw={'formnovalidate': True})

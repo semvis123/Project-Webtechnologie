@@ -21,7 +21,12 @@
         </div>
         <div class="config-buttons">
             {{ form.save() }}
-            {{ form.cancel() }}
+            <input
+                action="action"
+                onclick="window.history.go(-1); return false;"
+                type="submit"
+                value="Cancel"
+            />
         </div>
     </form>
     <div class="flash-messages">
