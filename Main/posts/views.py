@@ -71,9 +71,11 @@ def posts():
 
         return render_template('posts.html', posts=process_posts(posts))
     if request.method == 'POST':
+        text = str(request.form['text'])
         # Test the data
-        # Empty data is not valid
-        if len(str(request.form['text']).strip()) == 0:
+        if len(text.strip()) == 0 or \
+            text.count('\n') > 10 or \
+            len(text) > 512:
             return Response(status=500)
 
         # Create a new posts
@@ -112,7 +114,10 @@ def delete(post_id):
 @login_required
 def commment(post_id):
     try:
-        commment = Comment(current_user.id, post_id, str(request.form['text']))
+        text = str(request.form['text'])
+        if len(text) > 512:
+            return Response(status=500)
+        commment = Comment(current_user.id, post_id, text)
         db.session.add(commment)
         db.session.commit()
         flash('Saved your comment!')

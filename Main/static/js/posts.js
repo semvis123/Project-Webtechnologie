@@ -10,6 +10,10 @@ window.addEventListener('load', () => {
             data.append('text', text)
             fetch('/posts', {
                 method: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': csrf_token
+                },
+                credentials: 'same-origin',
                 body: data
             }).then(res => {
                 if (res.status == 200) {
@@ -41,6 +45,10 @@ window.addEventListener('load', () => {
                 data.append('text', text)
                 fetch(`/posts/${btn.dataset.post}/comment`, {
                     method: 'post',
+                    headers: {
+                        'X-CSRF-TOKEN': csrf_token
+                    },
+                    credentials: 'same-origin',
                     body: data
                 }).then(res => {
                     if (res.status == 200) {
@@ -68,6 +76,10 @@ window.addEventListener('load', () => {
             const isLiked = btn.dataset.liked == 'True'
             fetch(`/posts/${btn.dataset.post}/like`, {
                 method: isLiked ? 'delete' : 'post',
+                headers: {
+                    'X-CSRF-TOKEN': csrf_token
+                },
+                credentials: 'same-origin',
                 body: data
             }).then(res => {
                 if (res.status == 200) {
@@ -90,6 +102,10 @@ window.addEventListener('load', () => {
             const data = new URLSearchParams()
             fetch(`/posts/${btn.dataset.post}`, {
                 method: 'delete',
+                headers: {
+                    'X-CSRF-TOKEN': csrf_token
+                },
+                credentials: 'same-origin',
                 body: data
             }).then(res => {
                 if (res.status == 200) {
