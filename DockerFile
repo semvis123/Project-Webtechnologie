@@ -22,7 +22,6 @@ COPY app.py .
 ENV PATH=/root/.local:$PATH
 
 # Setting up the ENV
-ENV debug_mode="False"
 ENV DATA_PATH="/data"
 
 # Create the database
