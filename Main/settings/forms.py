@@ -15,10 +15,11 @@ def usernameValidator(form, _element):
     """
     username = User.query.filter_by(username=form.username.data).first()
     username_re = bool(re.match('^[A-Za-z0-9]*$', form.username.data))
-    if current_user.username != form.username.data and not username_re:
-        raise ValidationError('Username is not valid')
-    if current_user.username != form.username.data and username:
-        raise ValidationError('Username is already in use.')
+    if current_user.username != form.username.data:
+        if not username_re:
+            raise ValidationError('Username is not valid')
+        if username:
+            raise ValidationError('Username is already in use.')
 
 
 class ConfigForm(FlaskForm):
