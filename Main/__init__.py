@@ -10,7 +10,7 @@ login_manager = LoginManager()
 app.config['SECRET_KEY'] = '\x8e\x82\x99o^\xfd\xf8s\xd7\xf76\xab'
 
 # Open the database
-basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = os.environ['DATA_PATH']
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
     os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

@@ -18,13 +18,18 @@ COPY --from=builder /root/.local /root/.local
 COPY Main/ ./Main/
 COPY app.py .
 
-# Make the database
+# update PATH environment variable
+ENV PATH=/root/.local:$PATH
+
+# Setting up the ENV
+ENV debug_mode="False"
+ENV DATA_PATH="/data"
+
+# Create the database
+RUN mkdir $DATA_PATH
 RUN python -m flask db init
 RUN python -m flask db migrate -m ""
 RUN python -m flask db upgrade
-
-# update PATH environment variable
-ENV PATH=/root/.local:$PATH
 
 EXPOSE 5000
 
