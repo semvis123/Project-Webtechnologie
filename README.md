@@ -1,6 +1,6 @@
 # Project Webtechnologie
 
-> A simple social media site
+> A simple social media site (this was made as a school project and is not recommended to use for other purposes)
 
 ## Getting started without docker
 
